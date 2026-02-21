@@ -1,22 +1,33 @@
+<p align="center">
+  <img src="onlyappeals_logo.png" alt="OnlyAppeals" width="400">
+</p>
+
 # OnlyAppeals
 
-A chat-native MCP App that helps San Francisco homeowners prepare a Prop 8 informal review (property tax decline-in-value appeal). It turns property facts and comparable sales into a filing-ready evidence packet — no tax expertise required.
+A chat-native MCP App that helps homeowners in **San Francisco** and **Cook County (Chicago)** prepare property tax appeal packets. It turns property facts and comparable sales into a filing-ready evidence packet — no tax expertise required.
 
 ## What It Does
 
-1. **Property Lookup** — Enter an address and OnlyAppeals pulls real property data from SF Assessor records (via SF OpenData API)
-2. **Eligibility Check** — Validates property type, filing window (Jan 2 – Mar 31), and estimates case strength
-3. **Comparable Sales** — Automatically finds recently-sold nearby properties using geo-radius search, with assessed values as sale price proxies (Prop 13 resets)
+1. **Property Lookup** — Enter an address and OnlyAppeals pulls real property data from Assessor records (SF OpenData / Cook County Open Data)
+2. **Eligibility Check** — Validates property type, filing window, and estimates case strength
+3. **Comparable Sales** — Automatically finds recently-sold nearby properties using geo-radius search
 4. **Interactive Comp Workspace** — Visual widget to review, include/exclude, annotate, and sort comparable sales
 5. **Argument Drafting** — Generates a neutral value rationale narrative with adjustable tone (formal, concise, neutral)
 6. **Packet Generation** — Produces a filing-ready evidence packet with property summary, comps table, value argument, and submission checklist
-7. **Submission Guide** — SF-specific filing routes (online portal, mail, fax, email) with deadlines and instructions
+7. **Submission Guide** — City-specific filing routes (online portal, mail, fax, email) with deadlines and instructions
+
+## Supported Cities
+
+| City | Data Source | Appeal Type | Sale Price Data |
+|------|------------|-------------|-----------------|
+| **San Francisco** | SF OpenData (Assessor Tax Rolls) | Prop 8 Informal Review | Assessed value proxy (Prop 13) |
+| **Cook County (Chicago)** | Cook County Open Data (5 datasets) | Property Tax Appeal | Actual sale prices |
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `lookup-property` | Search SF Assessor records by address or block/lot |
+| `lookup-property` | Search Assessor records by address, block/lot (SF), or PIN (Cook County) |
 | `find-comps` | Find comparable sales near the subject property |
 | `check-eligibility` | Validate eligibility and assess case strength |
 | `manage-property` | Store/update subject property details |
@@ -24,7 +35,7 @@ A chat-native MCP App that helps San Francisco homeowners prepare a Prop 8 infor
 | `generate-argument` | Draft a value rationale from selected comps |
 | `generate-packet` | Produce the full filing-ready packet |
 | `export-packet` | Get packet as plain markdown |
-| `get-submission-info` | Return SF submission routes and deadlines |
+| `get-submission-info` | Return submission routes and deadlines |
 
 ## Widgets
 
@@ -42,14 +53,15 @@ Open [http://localhost:3000/inspector](http://localhost:3000/inspector) to test.
 
 ## Data Sources
 
-- **SF OpenData — Assessor Historical Secured Property Tax Rolls** (`wv5m-vpq2`): Free, no API key required. Provides property details, assessed values, coordinates, and recent sale dates for geo-radius comp search.
+- **SF OpenData — Assessor Historical Secured Property Tax Rolls** (`wv5m-vpq2`): Free, no API key required.
+- **Cook County Open Data** — Parcel Addresses (`3723-97qp`), Characteristics (`x54s-btds`), Assessed Values (`uzyt-m557`), Parcel Sales (`wvhk-k5uv`), Parcel Universe (`nj4t-kc8j`): Free, no API key required.
 
 ## Tech Stack
 
 - [mcp-use](https://mcp-use.com) — MCP server framework
 - React 19 + Tailwind 4 — Widget UI
 - Zod — Schema validation
-- SF OpenData SODA API — Property data
+- Socrata SODA API — Property data (both cities)
 
 ## Deploy
 
