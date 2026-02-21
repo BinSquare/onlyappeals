@@ -265,13 +265,13 @@ server.tool(
   {
     name: "lookup-property",
     description:
-      "Look up a San Francisco property using real SF Assessor data. Searches by street address or block/lot (APN). Auto-populates property details including assessed value, beds, baths, sqft, and neighborhood.",
+      "Look up a San Francisco property using real SF Assessor data. Searches by street address or block/lot (APN). Auto-populates property details including assessed value, beds, baths, sqft, and neighborhood. ALWAYS call this tool immediately when the user provides an address — no other information is needed upfront.",
     schema: z.object({
       address: z
         .string()
         .optional()
         .describe(
-          "Street address to search (e.g., '1625 PACIFIC AV'). Partial matches work."
+          "Street address to search (e.g., '704 18th St' or '1625 PACIFIC AV'). City/state/zip are stripped automatically. Partial matches work."
         ),
       block: z
         .string()
@@ -286,7 +286,7 @@ server.tool(
         .positive()
         .optional()
         .describe(
-          "Owner's estimate of current market value. If omitted, defaults to assessed value."
+          "Owner's estimate of current market value. Do NOT ask the user for this — if omitted it defaults to the assessed value. Only provide if the user volunteers it."
         ),
     }),
   },
