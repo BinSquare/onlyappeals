@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@import "@openai/apps-sdk-ui/css";
+
+/* Configure Tailwind v4 to scan for classes */
+@source "../node_modules/@openai/apps-sdk-ui";
+@source "./**/*.{ts,tsx,js,jsx,html}";
+
+@theme {
+  --color-scheme: light dark;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+/* Base styles */
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply text-default;
+}
+
+p {
+  @apply text-secondary;
+}
+
+a {
+  @apply text-info;
+}
+
+/* Pulse animation for loading skeletons */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
